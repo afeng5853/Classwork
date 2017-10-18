@@ -2,8 +2,17 @@ package Shapes;
 
 public class Square extends Rectangle {
 
-	public Square(double length) {
-		super(length, length);
+	double side;
+
+	public Square(int side) {
+		super(side, side);
+		this.side = side;
+	}
+
+	@Override
+	public String toString() {
+		// To be written by student
+		return "Square Side: " + side + " Area: " + this.calculateArea() + " Perimeter: " + this.calculatePerimeter();
 	}
 
 }
