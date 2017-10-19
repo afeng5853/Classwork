@@ -6,10 +6,10 @@ package Shapes;
  */
 public class Rectangle implements Shape {
 
-	private int length;
-	private int width;
+	protected double length;
+	protected double width;
 
-	public Rectangle(int length, int width) {
+	public Rectangle(double length, double width) {
 		this.length = length;
 		this.width = width;
 	}

@@ -15,7 +15,7 @@ public class Circle implements Shape {
 	 * 
 	 * @param radius
 	 */
-	public Circle(int radius) {
+	public Circle(double radius) {
 		// to be implemented by student
 		this.radius = radius;
 	}
