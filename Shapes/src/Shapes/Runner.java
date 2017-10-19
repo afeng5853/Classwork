@@ -15,7 +15,7 @@ package Shapes;
  */
 public class Runner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Shape circle1 = new Circle(3);
 		Shape rectangle1 = new Rectangle(10, 4);
 		Shape square1 = new Square(10);

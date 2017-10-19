@@ -13,8 +13,9 @@ public class ShapeUtilities {
 	 * Creates a random shape from the choices.
 	 * 
 	 * @return Shape Student Work: Update with your own shape.
+	 * @throws Exception 
 	 */
-	public static Shape randomShape() {
+	public static Shape randomShape() throws Exception {
 		Random rand = new Random();
 		int x = rand.nextInt(4);
 
@@ -26,7 +27,7 @@ public class ShapeUtilities {
 		case 2:
 			return new Square(rand.nextInt(50));
 		case 3:
-        	return new Triangle(rand.nextInt(50), rand.nextInt(50), rand.nextInt(50));
+        	return new Triangle(rand.nextInt(10)+20, rand.nextInt(5)+10, rand.nextInt(5)+20);
 		default:
 			return new Circle(rand.nextInt(100));
 		}
