@@ -23,7 +23,7 @@ public class Circle implements Shape {
 	@Override
 	public double calculateArea() {
 		// to be implemented by student
-		return 2 * pi * radius * radius;
+		return pi * radius * radius;
 	}
 
 	@Override
