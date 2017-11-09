@@ -18,7 +18,8 @@ public class ArrayMethods {
 		CopyArrays.printArray(testnodupe);
 		//int[][] productArr = productArray(test, test2);
 		//CopyArrays.print2DArray(productArr);
-		//System.out.println(factorial(5));
+		int[][] pascals = pascalTriangle(6);
+		printPascalTriangle(pascals);
 	}
 	
 	public static int[] removeDuplicates(int[] list) {
@@ -79,10 +80,29 @@ public class ArrayMethods {
 	}
 	
 	public static int[][] pascalTriangle(int n) {
-		int[][] ans = new int[n][n];
-		for (int i = 0)
-	}
-	public static void printPascalTriangle(int[ ] [ ] triangle) {
+		// formula : i!/(j!*(i-j)!)
+		int[][] ans = new int[n][];
+		for (int i = 0; i < n; i++) {
+			ans[i] = new int[i+1];
+			for (int j = 0; j <= i; j++) {
+				ans[i][j] = factorial(i) / (factorial(j) * factorial(i - j));
+			}
+		}
+		return ans;
 		
+	}
+	public static void printPascalTriangle(int[][] triangle) {
+		for (int i = 0; i < triangle.length; i++) {
+			int padding = triangle.length - i - 1;
+			StringBuilder spacePadding = new StringBuilder();
+			for (int p = 0; p < padding; p++) {
+				spacePadding.append(' ');
+			}
+			System.out.print(spacePadding);
+			for (int j = 0; j < triangle[i].length; j++) {
+				System.out.print(triangle[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 }
