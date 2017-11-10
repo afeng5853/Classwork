@@ -22,7 +22,7 @@ public class ArrayMethods {
 		CopyArrays.printArray(testnodupe);
 		//int[][] productArr = productArray(test, test2);
 		//CopyArrays.print2DArray(productArr);
-		int[][] pascals = pascalTriangle(6);
+		int[][] pascals = pascalTriangle(12);
 		printPascalTriangle(pascals);
 		*/
 	}
@@ -113,22 +113,50 @@ public class ArrayMethods {
 	}
 	
 	/**
+	 * Centers a string to size len with spaces
+	 * @param str the string to be centered
+	 * @param len the length of each string to be padded by spaces if necessary
+	 * @return a string of size len (padded by spaces if necessary)
+	 */
+	private static String center(String str, int len){
+	    String out = String.format("%" + len + "s%s%" + len + "s", "" , str ,"");
+	    
+	    // used to remove extra spaces at the end of both sides to be of width len
+	    // this is done by finding the middle and taking half the length for left than half the length for the right side
+	    int mid =  out.length() / 2;
+	    int start = mid - len/2;
+	    int end = mid + len/2; 
+	    return out.substring(start, end);
+	}
+	
+	/**
+	 * Creates a string with each element of the array having a printed width of w (padded with spaces)
+	 * @param arr the array to be printed
+	 * @param w the width of each element
+	 * @return a string with each element of the array having a printed width of w (padded with spaces)
+	 */
+	private static String arrayToStringWithSpacing(int[] arr, int w) {
+		w *= 2; // for left and right spacing (width of printed value)
+		StringBuilder build = new StringBuilder();
+		for (int i = 0; i < arr.length; i++) {
+			build.append(center(Integer.toString(arr[i]), w));
+		}
+		return build.toString();
+	}
+	
+	/**
 	 * Prints Pascal's triangle
 	 * @param triangle pascals triangle as a jagged array
 	 */
-	
 	public static void printPascalTriangle(int[][] triangle) {
+		int[] lastRow = triangle[triangle.length - 1]; // last row is the longest, so we have to make the other rows relative to it
+		int maxEle = lastRow[triangle.length/2];
+		int maxDigitLength = Integer.toString(maxEle).length(); // length of longest int
+		
+		int lastRowLength = lastRow.length;
 		for (int i = 0; i < triangle.length; i++) {
-			int padding = triangle.length - i - 1;
-			StringBuilder spacePadding = new StringBuilder();
-			for (int p = 0; p < padding; p++) {
-				spacePadding.append(' ');
-			}
-			System.out.print(spacePadding);
-			for (int j = 0; j < triangle[i].length; j++) {
-				System.out.print(triangle[i][j] + " ");
-			}
-			System.out.println();
+			String row = center(arrayToStringWithSpacing(triangle[i], maxDigitLength), lastRowLength * (maxDigitLength * 2));
+			System.out.println(row);
 		}
 	}
 }
