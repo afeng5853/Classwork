@@ -1,8 +1,4 @@
 package Lab3_1;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import ljthw.CopyArrays;
 
 /**
