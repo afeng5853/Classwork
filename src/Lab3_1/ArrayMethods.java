@@ -11,11 +11,11 @@ import ljthw.CopyArrays;
 public class ArrayMethods {
 
 	public static void main(String[] args) {
-		/*
-		int[] test = {2, 3, 5, 6, 7, 7, 8, 8, 9};
+		int[] test = {0, 0, 3, 5, 2, 3, 5, 6, 7, 7, 8, 8, 9};
 		int[] test2 = {2, 3, 5, 6, 7, 7, 8, 8, 9};
 		int[] testnodupe = removeDuplicates(test);
 		CopyArrays.printArray(testnodupe);
+		/*
 		//int[][] productArr = productArray(test, test2);
 		//CopyArrays.print2DArray(productArr);
 		int[][] pascals = pascalTriangle(12);
@@ -30,7 +30,6 @@ public class ArrayMethods {
 	 */
 
 	public static int[] removeDuplicates(int[] list) {
-		boolean hasZero = false; // Since uninitialized vars in an int array becomes 0, we need to see if the array had a zero originally
 		int[] ansMedium = new int[list.length]; // container of duplicate values + null (0) if duplicates
 		int size = 0; // size of non-duplicate array
 		
@@ -44,9 +43,6 @@ public class ArrayMethods {
 				}
 			}
 			if (!duplicate) {
-				if (list[i] == 0) {
-					hasZero = true;
-				}
 				ansMedium[i] = list[i]; // fills the array with non-duplicate + zeros if the index for list is a duplicate
 				size++;
 			}
@@ -58,11 +54,6 @@ public class ArrayMethods {
 				ans[populateIdx] = ansMedium[i];
 				populateIdx++;
 			}
-		}
-		
-		// add back zero if it was in the original array
-		if (hasZero) {
-			ans[populateIdx+1] = 0;
 		}
 
 		return ans;
