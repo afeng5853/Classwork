@@ -29,9 +29,9 @@ public class CopyArrays {
 	}
 	
 	
-	public static void printArray(int[] arr) {
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
+	public static void printArray(String[] merged) {
+		for (int i = 0; i < merged.length; i++) {
+			System.out.print(merged[i] + " ");
 		}
 		System.out.println();
 	}
