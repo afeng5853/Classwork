@@ -83,20 +83,25 @@ public class ArrayMethods2 {
 	public static int partition(int[] list) {
 		int pivot = list[0]; // set pivot to first item
 		int j = 0; // current index to swap for items less than the pivot
+		int pivotIdx = 0;
 		for (int i = 1; i < list.length; i++) {
 			if (list[i] <= pivot) {
+				// track pivot index 
+				if (pivotIdx == j) {
+					pivotIdx = i;
+				}
 				// swap pivot to latest index in the small partition
 				int temp = list[j];
 				list[j] = list[i];
 				list[i] = temp;
 				j++;
 			}
+			
 		}
 		// return pivot to correct location
-		int temp = list[pivot];
-		list[pivot] = list[j];
+		int temp = list[pivotIdx];
+		list[pivotIdx] = list[j];
 		list[j] = temp;
-		
 		return j;
 	}
 }
