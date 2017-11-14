@@ -5,6 +5,12 @@ import java.util.Arrays;
 
 import ljthw.*;
 
+/**
+ * Lab 3.2
+ * <p> Contains useful sorting array methods <p>
+ * @author Alex Feng, Raymond Cheung
+ * @since 11/14/2017
+ */
 public class ArrayMethods2 {
 	public static void main (String[] args) {
 		String[] test1 = {"ad", "hi", "money", "apple", "hello"};
@@ -13,8 +19,15 @@ public class ArrayMethods2 {
 		CopyArrays.printArray(mergeSort(test1));
 		int[] list = {5, 1, 7, 8, 9, 5, 2};
 		System.out.println(partition(list));
+		CopyArrays.printArray(list);
 	}
 	
+	/**
+	 * merges two sorted arrays and sorts it
+	 * @param list1 a sorted array
+	 * @param list2 a sorted array
+	 * @return a sorted merged array
+	 */
 	public static String[] merge(String[] list1, String[] list2) {
 		String[] result = new String[list1.length + list2.length];
 		int i = 0; // list 1 index
@@ -43,6 +56,11 @@ public class ArrayMethods2 {
 		return result;
 	}
 	
+	/**
+	 * sorts array based on the merge sort algorithm
+	 * @param list the array to be sorted
+	 * @return a sorted array
+	 */
 	public static String[] mergeSort(String[] list) {
 		if (list.length == 1) {
 			return list;
@@ -55,18 +73,30 @@ public class ArrayMethods2 {
 		}
 	}
 	
+	/**
+	 * The pivot is set to the first item and all of the others items are partitioned based on that pivot
+	 * If it's less than or equal to, it is partitioned on the left side
+	 * If it's on the right than, it is partition on the right side
+	 * @param list to be partitioned
+	 * @return the index of the pivot
+	 */
 	public static int partition(int[] list) {
-		int pivot = list[0];
-		ArrayList<Integer> left = new ArrayList<>();
-		ArrayList<Integer> right = new ArrayList<>();
+		int pivot = list[0]; // set pivot to first item
+		int j = 0; // current index to swap for items less than the pivot
 		for (int i = 1; i < list.length; i++) {
-			if (list[i] > pivot) {
-				right.add(list[i]);
-			} else {
-				left.add(list[i]);
+			if (list[i] <= pivot) {
+				// swap pivot to latest index in the small partition
+				int temp = list[j];
+				list[j] = list[i];
+				list[i] = temp;
+				j++;
 			}
 		}
-		//list = left.addAll(right);
-		return left.size();
+		// return pivot to correct location
+		int temp = list[pivot];
+		list[pivot] = list[j];
+		list[j] = temp;
+		
+		return j;
 	}
 }
