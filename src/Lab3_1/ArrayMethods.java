@@ -11,7 +11,7 @@ import ljthw.CopyArrays;
 public class ArrayMethods {
 
 	public static void main(String[] args) {
-		int[] test = {3, 5, 2, 3, 5, 6, 7, 7, 8, 8, 9};
+		/*int[] test = {3, 5, 2, 3, 5, 6, 7, 7, 8, 8, 9};
 		int[] test2 = {2, 3, 5, 6, 7, 7, 8, 8, 9};
 		int[] testnodupe = removeDuplicates(test);
 		CopyArrays.printArray(testnodupe);

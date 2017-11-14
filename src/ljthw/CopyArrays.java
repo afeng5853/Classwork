@@ -28,10 +28,16 @@ public class CopyArrays {
 		return copy;
 	}
 	
+	public static void printArray(int[] strings) {
+		for (int i = 0; i < strings.length; i++) {
+			System.out.print(strings[i] + " ");
+		}
+		System.out.println();
+	}
 	
-	public static void printArray(String[] merged) {
-		for (int i = 0; i < merged.length; i++) {
-			System.out.print(merged[i] + " ");
+	public static void printArray(String[] strings) {
+		for (int i = 0; i < strings.length; i++) {
+			System.out.print(strings[i] + " ");
 		}
 		System.out.println();
 	}

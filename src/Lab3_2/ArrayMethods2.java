@@ -66,7 +66,7 @@ public class ArrayMethods2 {
 				left.add(list[i]);
 			}
 		}
-		list = left.addAll(right);
+		//list = left.addAll(right);
 		return left.size();
 	}
 }
