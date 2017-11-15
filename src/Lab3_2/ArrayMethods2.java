@@ -1,6 +1,5 @@
 package Lab3_2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import ljthw.*;
@@ -13,11 +12,11 @@ import ljthw.*;
  */
 public class ArrayMethods2 {
 	public static void main (String[] args) {
-		String[] test1 = {"ad", "hi", "money", "apple", "hello"};
+		String[] test1 = {"test", "zebra", "lol", "year"};
 		String[] test2 = {};
 		String[] merged = merge(test1, test2);
 		CopyArrays.printArray(mergeSort(test1));
-		int[] list = {5, 1, 7, 8, 9, 5, 2};
+		int[] list = {};
 		System.out.println(partition(list));
 		CopyArrays.printArray(list);
 	}
@@ -62,7 +61,7 @@ public class ArrayMethods2 {
 	 * @return a sorted array
 	 */
 	public static String[] mergeSort(String[] list) {
-		if (list.length == 1) {
+		if (list.length <= 1) {
 			return list;
 		}
 		else {
@@ -81,6 +80,10 @@ public class ArrayMethods2 {
 	 * @return the index of the pivot
 	 */
 	public static int partition(int[] list) {
+		// if list is empty
+		if (list.length == 0) {
+			return -1;
+		}
 		int pivot = list[0]; // set pivot to first item
 		int j = 0; // current index to swap for items less than the pivot
 		int pivotIdx = 0;
