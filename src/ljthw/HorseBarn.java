@@ -49,7 +49,7 @@ public class HorseBarn {
 			if (spaces[i] != null) {
 				build.append(spaces[i].toString() + " ");
 			} else {
-				build.append("null ");
+				build.append("[null] ");
 			}
 		}
 		return build.toString();
