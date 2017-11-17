@@ -35,7 +35,7 @@ public class CopyArrays {
 		System.out.println();
 	}
 	
-	public static void printArray(String[] strings) {
+	public static void printArray(Object[] strings) {
 		for (int i = 0; i < strings.length; i++) {
 			System.out.print(strings[i] + " ");
 		}
