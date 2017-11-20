@@ -28,6 +28,13 @@ public class CopyArrays {
 		return copy;
 	}
 	
+	public static void printArray(double[] strings) {
+		for (int i = 0; i < strings.length; i++) {
+			System.out.print(strings[i] + " ");
+		}
+		System.out.println();
+	}
+	
 	public static void printArray(int[] strings) {
 		for (int i = 0; i < strings.length; i++) {
 			System.out.print(strings[i] + " ");
