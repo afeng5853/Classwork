@@ -16,7 +16,7 @@ public class ArrayMethods2 {
 		String[] test2 = {};
 		String[] merged = merge(test1, test2);
 		CopyArrays.printArray(mergeSort(test1));
-		int[] list = {};
+		int[] list = {20, 12, 7, 4, 200, 100, 300, 150, 20, 10, 30, 40, 10, 5, 3};
 		System.out.println(partition(list));
 		CopyArrays.printArray(list);
 	}
