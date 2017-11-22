@@ -20,8 +20,11 @@ public class ArrayMethod4 {
 		quickSort(arr, 0, arr.length);
 		//sorted Array
 		 */
+		long time = System.nanoTime();
 		CopyArrays.printArray(arr);
 		System.out.println(maxSpan(span));
+	    System.out.println(System.nanoTime() - time);
+
 	}
 	
 	/**
@@ -60,7 +63,7 @@ public class ArrayMethod4 {
 		list[j] = temp;
 		return j;
 	}
-	
+
 	/**
 	 * Sorts an array using quick sort
 	 * @param arr the array to be sorted
