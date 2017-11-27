@@ -1,5 +1,10 @@
 package Lab3_4;
 
+/**
+ * Contains partition, quickSort, countingSort
+ * @author Alex Feng, Raymond Cheung
+ * @since 11/27/2017
+ */
 public class ArrayMethods4 {
 
 	public static void main(String[] args) {
