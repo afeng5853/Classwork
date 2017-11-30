@@ -111,6 +111,10 @@ public class ArrayMethods3 {
 	public static void bubbleSort(String [] list1) {
 		int swaps = 0;
 		for (int i = 1; i < list1.length; i++) {
+			if (list1[i].compareTo(list1[i-1]) < 0) {
+				swap(list1, i, i-1);
+				swaps++;
+			}
 			if (i == list1.length - 1) {
 				if (swaps == 0) {
 					break;
@@ -118,10 +122,6 @@ public class ArrayMethods3 {
 					swaps = 0;
 					i = 1;
 				}
-			}
-			if (list1[i].compareTo(list1[i-1]) < 0) {
-				swap(list1, i, i-1);
-				swaps++;
 			}
 		}
 	}
