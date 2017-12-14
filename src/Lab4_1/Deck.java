@@ -9,6 +9,7 @@ public class Deck {
 	
 	public Deck(String[] ranks, String[] suits, int[] points) {
 		ArrayList<Card> cards = new ArrayList<>();
+		Dealt = new ArrayList<>();
 		// for each rank, create each suit for that rank
 		for (int i = 0; i < ranks.length; i++) {
 			for (int j = 0; j < suits.length; j++) {
@@ -36,10 +37,13 @@ public class Deck {
 	
 	/**
 	 * removes a card from the top of the deck by removing the last card and returning it
+	 * also adds it to the dealt array
 	 * @return the card on top (the last card of the list)
 	 */
 	public Card deal() {
-		return this.unDealt.remove(this.size()-1);
+		Card dealtCard = this.unDealt.remove(this.size()-1);
+		Dealt.add(dealtCard);
+		return dealtCard;
 	}
 	
 	/**
