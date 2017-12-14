@@ -41,6 +41,9 @@ public class Deck {
 	 * @return the card on top (the last card of the list)
 	 */
 	public Card deal() {
+		if (isEmpty()) {
+			return null;
+		}
 		Card dealtCard = this.unDealt.remove(this.size()-1);
 		Dealt.add(dealtCard);
 		return dealtCard;
