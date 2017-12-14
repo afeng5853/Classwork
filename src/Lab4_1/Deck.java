@@ -64,9 +64,8 @@ public class Deck {
 	 * shuffles the deck using an algorithm simialr to selection sort
 	 */
 	public void shuffle() {
-		Random r = new Random();
 		for (int k = 51; k > 0; k--) {
-			exchange(k, r.nextInt(k+1));
+			exchange(k, (int) (Math.random() * (k+1)));
 		}
 	}
 }
