@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CSVUtilities {
@@ -34,12 +35,7 @@ public class CSVUtilities {
 	 * @return an ArrayList with the headers for each column
 	 */
 	public List<String> getColumnHeaders() {
-		List<String> headers = new ArrayList<String>();
-		String[] headerRow = CSVData.get(0).split(",");
-		for (int i = 0; i < headerRow.length; i++) {
-			headers.add(headerRow[i]);
-		}
-		return headers;
+		return Arrays.asList(CSVData.get(0).split(","));
 	}
 
 	/**
