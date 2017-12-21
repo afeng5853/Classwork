@@ -114,10 +114,10 @@ public class CSVUtilities {
 	 * @param count the number of rows that are not null
 	 * @return an ArrayList with the data converted to Integer
 	 */
-	public List<Integer> getDataInt(int column, int count) {
-		List<Integer> data = new ArrayList<Integer>();
+	public Map<Integer, Integer> getDataInt(int column, int count) {
+		Map<Integer, Integer> indexAndData = new HashMap<Integer, Integer>();
 		int i = 1;
-		while (i < count) {
+		while (i < count && i < CSVData.size()) {
 			String[] row = CSVData.get(i).split(",");
 			String dataCellString = row[column];
 			Integer dataCellInt = null;
@@ -128,10 +128,10 @@ public class CSVUtilities {
 				count++;
 				continue;
 			}
-			data.add(dataCellInt);
+			indexAndData.put(i, dataCellInt);
 			i++;
 		}
-		return data;
+		return indexAndData;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class CSVUtilities {
 	public Map<Integer, Double> getDataDouble(int column, int count) {
 		Map<Integer, Double> indexAndData = new HashMap<Integer, Double>();
 		int i = 1;
-		while (i < count) {
+		while (i < count && i < CSVData.size()) {
 			String[] row = CSVData.get(i).split(",");
 			String dataCellString = row[column];
 			Double dataCellDouble = null;

@@ -2,6 +2,7 @@ package Lab4_2;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class fxTest extends Application {
         launch(args);
     }
     
-    public static Text[][] asTextMatrix(List<List<Object>> matrix) {
+  /*  public static Text[][] asTextMatrix(List<List<Object>> matrix) {
     	Text[][] textMatrix = new Text[matrix.size()][];
     	int i = 0;
     	for (List<Object> row : matrix) {
@@ -54,29 +55,39 @@ public class fxTest extends Application {
     			grid.add(t, j, i);
     		}
     	}
-    }
+    }*/
     
-    private Map<String, Double> getAverageGradRates(CSVUtilities csv, Map<Integer, Double> gradRateWithIndex) {
-    	Map<String, Double> ethnicityToGradRate = new HashMap<String, Double>();
-    	Map<String, Integer> ethnicityLengths = new HashMap<String, Integer>();
-    	for (Map.Entry<Integer, Double> entry : gradRateWithIndex.entrySet())
+    /**
+     * Gets graduation rates of ethnicity by year
+     * @param csv
+     * @param gradWithIndex key: index value: value
+     * @return graduation rates of ethnicity by year
+     */
+    private Map<String, Double> getAverageGradRates(CSVUtilities csv, Map<Integer, Integer> gradWithIndex) {
+    	Map<String, Double> ethnicityToGrad = new HashMap<String, Double>();
+    	Map<String, Integer> ethnicityToCohort = new HashMap<String, Integer>();
+    	for (Map.Entry<Integer, Integer> entry : gradWithIndex.entrySet())
     	{
-    		String ethnicityYear = csv.getData(entry.getKey(), 5) + " " + csv.getData(entry.getKey(), 3);
-    		if (ethnicityToGradRate.containsKey(ethnicityYear)) {
-    			ethnicityToGradRate.put(ethnicityYear, ethnicityToGradRate.get(ethnicityYear) + entry.getValue());
-    			ethnicityLengths.put(ethnicityYear, ethnicityLengths.get(ethnicityYear) + 1);
+    		// key as Ethnicity + " " + Year e.g. "Hispanic 2001"
+    		String ethnicityYear = csv.getData(entry.getKey(), 4) + " " + csv.getData(entry.getKey(), 2);
+    		if (ethnicityToGrad.containsKey(ethnicityYear)) {
+    			ethnicityToGrad.put(ethnicityYear, ethnicityToGrad.get(ethnicityYear) + entry.getValue());
+    			int cohortAmount = Integer.parseInt(csv.getData(entry.getKey(), 5));
+    			ethnicityToCohort.put(ethnicityYear, ethnicityToCohort.get(ethnicityYear) + cohortAmount);
     		} else {
-    			ethnicityToGradRate.put(ethnicityYear, entry.getValue());
-    			ethnicityLengths.put(ethnicityYear, 1);
+    			ethnicityToGrad.put(ethnicityYear, (double) entry.getValue());
+    			int cohortAmount = Integer.parseInt(csv.getData(entry.getKey(), 5));
+    			ethnicityToCohort.put(ethnicityYear, cohortAmount);
     		}
     	}
-    	for (Map.Entry<String, Double> entry : ethnicityToGradRate.entrySet())
+    	for (Map.Entry<String, Double> entry : ethnicityToGrad.entrySet())
     	{
     		String ethnicityYear = entry.getKey();
-    		ethnicityToGradRate.put(ethnicityYear, entry.getValue() / ethnicityLengths.get(ethnicityYear));
+    		ethnicityToGrad.put(ethnicityYear, entry.getValue() / ethnicityToCohort.get(ethnicityYear));
     	}
-    	return ethnicityToGradRate;
+    	return ethnicityToGrad;
     }
+    
     
     
     @Override
@@ -85,25 +96,31 @@ public class fxTest extends Application {
         File grad_rates = new File("2005-2011_Grad_Rates.csv");
 		CSVUtilities csv = new CSVUtilities(grad_rates);
 		
-		Map<Integer, Double> gradRateWithIndex = csv.getDataDouble(7, 200);
-		Map<String, Double> gradRateByEthnicity = getAverageGradRates(csv, gradRateWithIndex);
+		Map<Integer, Integer> grads = csv.getDataInt(6, 14250);
+		
+		Map<String, Double> gradRateByEthnicity = getAverageGradRates(csv, grads);
         
-        final NumberAxis xAxis = new NumberAxis(2004, 2012, 1);
-        final NumberAxis yAxis = new NumberAxis();
+        final NumberAxis xAxis = new NumberAxis(2000, 2008, 1);
+        final NumberAxis yAxis = new NumberAxis(0.3, 1.0, 0.1);
         xAxis.setLabel("Year");
         //creating the chart
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
-        lineChart.setTitle("Graduation rate by ethnicity, 2005-2011");
+        lineChart.setTitle("NYC graduation rate by ethnicity, 2001-2007");
         //defining a series
         XYChart.Series hispanic = new XYChart.Series();
         XYChart.Series asian = new XYChart.Series();
         XYChart.Series white = new XYChart.Series();
         XYChart.Series black = new XYChart.Series();
+        hispanic.setName("Hispanic");
+        asian.setName("Asian");
+        white.setName("White");
+        black.setName("Black");
         for (Map.Entry<String, Double> entry : gradRateByEthnicity.entrySet()) {
         	String[] ethnicityAndYear = entry.getKey().split(" ");
         	String ethnicity = ethnicityAndYear[0];
         	String year = ethnicityAndYear[1];
         	switch (ethnicity) {
+        		
 		    	case "Hispanic": {
 		    		hispanic.getData().add(new XYChart.Data<>(Integer.parseInt(year), entry.getValue()));
 		    		break;
@@ -133,7 +150,7 @@ public class fxTest extends Application {
         
         BorderPane bp = new BorderPane();
         bp.setCenter(lineChart);
-        primaryStage.setScene(new Scene(bp, 300, 250));
+        primaryStage.setScene(new Scene(bp, 800, 600));
         primaryStage.show();
     }
 }
