@@ -8,7 +8,6 @@ public class SimonSaysOrder {
 	public final static int YELLOW = 1;
 	public final static int BLUE = 2;
 	public final static int GREEN = 3;
-	public final static int ROUND_DONE = -1;
 	public final static int MATCH = 1;
 	public final static int NO_MATCH = 0;
 	private List<Integer> saveOrder;
@@ -27,17 +26,19 @@ public class SimonSaysOrder {
 	}
 
 	private int randomColor() {
-		return (int) ((Math.random() * 4) + 1);
+		return (int) (Math.random() * 4);
 	}
 	
 	public void addNextColor() {
 		this.saveOrder.add(randomColor());
 	}
 	
+	public boolean noMoreMoves() {
+		return this.playOrder.isEmpty();
+	}
+	
 	public int stepEqual(int color) {
-		if (this.playOrder.size() == 0) {
-			return ROUND_DONE;
-		} else if (this.playOrder.remove(0) == color) {
+		if (this.playOrder.remove(0) == color) {
 			return MATCH;
 		} else {
 			return NO_MATCH;

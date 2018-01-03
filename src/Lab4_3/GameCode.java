@@ -3,8 +3,10 @@ package Lab4_3;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.animation.Timeline;
+import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -23,7 +25,10 @@ public class GameCode extends Application {
     @Override
     public void start(Stage primaryStage) {
     	BackEnd backEnd = new BackEnd();
-    	Timeline tl = new Timeline();
+    	
+    	SequentialTransition show = new SequentialTransition();
+    	show.setAutoReverse(false);
+    	
         primaryStage.setTitle("Hello World!");
         BorderPane layout = new BorderPane();
   		GridPane grid = new GridPane();
@@ -40,25 +45,25 @@ public class GameCode extends Application {
   		red.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//backEnd.sendInput(SimonSaysOrder.RED);
+				backEnd.receiveInput(red);
 			}
   		});
   		yellow.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+  			@Override
 			public void handle(MouseEvent event) {
-				//backEnd.sendInput(SimonSaysOrder.YELLOW);
+				backEnd.receiveInput(yellow);
 			}
   		});
   		blue.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+  			@Override
 			public void handle(MouseEvent event) {
-				//backEnd.sendInput(SimonSaysOrder.BLUE);
+				backEnd.receiveInput(blue);
 			}
   		});
   		green.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+  			@Override
 			public void handle(MouseEvent event) {
-				//backEnd.sendInput(SimonSaysOrder.GREEN);
+				backEnd.receiveInput(green);
 			}
   		});
   		List<Circle> circles = new ArrayList<>();
@@ -75,8 +80,8 @@ public class GameCode extends Application {
   		grid.add(blue, 0, 1);
   		grid.add(green, 1, 1);
   		
-  		backEnd.fill(tl, red, yellow, green, blue);
-  		tl.play();
+  		backEnd.fill(show, red, yellow, green, blue);
+  		show.play();
         primaryStage.setScene(new Scene(layout, 800, 600));
         primaryStage.show();
     }
