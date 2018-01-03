@@ -4,6 +4,8 @@ import java.util.List;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -13,7 +15,7 @@ public class BackEnd {
 	private static final int SHOW = 0;
 	private static final int PLAY = 1;
 	private static final int END = 2;
-	private int state = SHOW;
+	public static int state = SHOW;
 
 	public BackEnd() {
 		this.simonSays = new SimonSaysOrder(10);
@@ -42,6 +44,12 @@ public class BackEnd {
 					break;
 			}
 			st.getChildren().addAll(blink.getFade(), blink.getUnfade());
+			st.setOnFinished(new EventHandler<ActionEvent>(){
+	            @Override
+	            public void handle(ActionEvent arg0) {
+	                state = PLAY;
+	            }
+	        });
 		}
 	}
 	
@@ -59,7 +67,9 @@ public class BackEnd {
 	}
 
 	public void receiveInput(Circle c) {
-		(new BlinkTransition(c)).play();
+		if (this.state != BackEnd.SHOW) {
+			(new BlinkTransition(c)).play();
+		}
 		if (this.state == BackEnd.PLAY) {
 			int result = simonSays.stepEqual(mapPaintToConstantColor(c.getFill()));
 			switch (result) {
