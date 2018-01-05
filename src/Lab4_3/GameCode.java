@@ -17,27 +17,38 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class GameCode extends Application {
-
+	private final Circle red = new Circle();
+	private final Circle yellow = new Circle();
+	private final Circle green = new Circle();
+	private final Circle blue = new Circle();
+	
 	public static void main(String[] args) {
         launch(args);
     }
 
+	public void handleInput(BackEnd b, Circle c) {
+		int state = b.receiveInput(c);
+		if (state == BackEnd.SHOW) {
+			SequentialTransition show = new SequentialTransition();
+			show.setAutoReverse(false);
+			b.fill(show, red, yellow, green, blue);
+			show.play();
+		}
+		if (state == BackEnd.END) {
+			
+		}
+	}
+	
     @Override
     public void start(Stage primaryStage) {
     	BackEnd backEnd = new BackEnd();
     	
-    	SequentialTransition show = new SequentialTransition();
-    	show.setAutoReverse(false);
     	
         primaryStage.setTitle("Hello World!");
         BorderPane layout = new BorderPane();
   		GridPane grid = new GridPane();
   		layout.setCenter(grid);
   		
-  		Circle red = new Circle();
-  		Circle yellow = new Circle();
-  		Circle blue = new Circle();
-  		Circle green = new Circle();
   		red.setFill(Color.RED);
   		yellow.setFill(Color.YELLOW);
   		blue.setFill(Color.BLUE);
@@ -45,25 +56,25 @@ public class GameCode extends Application {
   		red.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				backEnd.receiveInput(red);
+				handleInput(backEnd, red);
 			}
   		});
   		yellow.setOnMouseClicked(new EventHandler<MouseEvent>() {
   			@Override
 			public void handle(MouseEvent event) {
-				backEnd.receiveInput(yellow);
+  				handleInput(backEnd, yellow);
 			}
   		});
   		blue.setOnMouseClicked(new EventHandler<MouseEvent>() {
   			@Override
 			public void handle(MouseEvent event) {
-				backEnd.receiveInput(blue);
+  				handleInput(backEnd, blue);
 			}
   		});
   		green.setOnMouseClicked(new EventHandler<MouseEvent>() {
   			@Override
 			public void handle(MouseEvent event) {
-				backEnd.receiveInput(green);
+  				handleInput(backEnd, green);
 			}
   		});
   		List<Circle> circles = new ArrayList<>();
@@ -80,10 +91,9 @@ public class GameCode extends Application {
   		grid.add(blue, 0, 1);
   		grid.add(green, 1, 1);
   		
-  		backEnd.fill(show, red, yellow, green, blue);
-  		show.play();
         primaryStage.setScene(new Scene(layout, 800, 600));
         primaryStage.show();
+        handleInput(backEnd, null);
     }
 
 }

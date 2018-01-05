@@ -12,13 +12,14 @@ import javafx.scene.shape.Circle;
 
 public class BackEnd {
 	private SimonSaysOrder simonSays;
-	private static final int SHOW = 0;
-	private static final int PLAY = 1;
-	private static final int END = 2;
-	public static int state = SHOW;
+	public static final int SHOW = 0;
+	public static final int PLAY = 1;
+	public static final int END = 2;
+	private int round = 0;
+	public int state = SHOW;
 
 	public BackEnd() {
-		this.simonSays = new SimonSaysOrder(10);
+		this.simonSays = new SimonSaysOrder(1);
 	}
 	
 	
@@ -66,8 +67,8 @@ public class BackEnd {
 		return -1;
 	}
 
-	public void receiveInput(Circle c) {
-		if (this.state != BackEnd.SHOW) {
+	public int receiveInput(Circle c) {
+		if (this.state != BackEnd.SHOW && this.state != BackEnd.END) {
 			(new BlinkTransition(c)).play();
 		}
 		if (this.state == BackEnd.PLAY) {
@@ -76,16 +77,20 @@ public class BackEnd {
 				case SimonSaysOrder.MATCH:
 					if (simonSays.noMoreMoves()) {
 						this.state = BackEnd.SHOW;
+						simonSays.addNextColor();
+						simonSays.resetRound();
+						this.round++;
 					}
 					break;
 				case SimonSaysOrder.NO_MATCH:
-					this.state = 2;
+					this.state = BackEnd.END;
 					break;
 				default:
 					System.out.println("test");
 					break;
 			}
 		}
+		return this.state;
 	}
 
 
