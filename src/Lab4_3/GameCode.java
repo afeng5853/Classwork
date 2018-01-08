@@ -101,7 +101,7 @@ public class GameCode extends Application {
   		button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            		handleInput(backEnd,red);
+            		handleInput(backEnd,null);
             }
         });        
   		Label scoreInfo = new Label();
@@ -110,7 +110,6 @@ public class GameCode extends Application {
   		gameInfo.getChildren().add(button);
   		primaryStage.setScene(new Scene(layout, 800, 600));
         primaryStage.show();
-        handleInput(backEnd, null);
     }
 
 }
