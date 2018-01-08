@@ -9,9 +9,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -46,6 +49,9 @@ public class GameCode extends Application {
     	
         primaryStage.setTitle("Hello World!");
         BorderPane layout = new BorderPane();
+        HBox gameInfo = new HBox();
+        layout.setRight(gameInfo);
+        gameInfo.setMinWidth(500);
   		GridPane grid = new GridPane();
   		layout.setCenter(grid);
   		
@@ -91,7 +97,18 @@ public class GameCode extends Application {
   		grid.add(blue, 0, 1);
   		grid.add(green, 1, 1);
   		
-        primaryStage.setScene(new Scene(layout, 800, 600));
+  		Button button = new Button("Start Game");
+  		button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            		handleInput(backEnd,red);
+            }
+        });        
+  		Label scoreInfo = new Label();
+  		scoreInfo.setText("Current Score");
+  		
+  		gameInfo.getChildren().add(button);
+  		primaryStage.setScene(new Scene(layout, 800, 600));
         primaryStage.show();
         handleInput(backEnd, null);
     }
