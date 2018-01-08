@@ -85,7 +85,7 @@ public class ScoreTracker {
 				data.add(line);
 			}
 		} catch (IOException ioe ){
-			ioe.printStackTrace();
+			ioe.printStackTrace(); 
 		}
 		return data;
 	}
