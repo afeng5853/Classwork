@@ -102,7 +102,7 @@ public class GameCode extends Application {
             @Override
             public void handle(ActionEvent event) {
             		handleInput(backEnd,null);
-            }
+            } 
         });        
   		Label scoreInfo = new Label();
   		scoreInfo.setText("Current Score");
