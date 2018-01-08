@@ -2,13 +2,14 @@ package Lab4_3;
 
 import java.util.List;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class BackEnd {
 	private SimonSaysOrder simonSays;
@@ -17,11 +18,12 @@ public class BackEnd {
 	public static final int END = 2;
 	private int round = 0;
 	public int state = SHOW;
+	private ScoreTracker scoreTracker;
 
-	public BackEnd() {
+	public BackEnd(ScoreTracker scoreTracker) {
 		this.simonSays = new SimonSaysOrder(1);
+		this.scoreTracker = scoreTracker;
 	}
-	
 	
 	public void fill(SequentialTransition st, Circle red, Circle yellow, Circle green, Circle blue) {
 		List<Integer> order = simonSays.getSaveOrder();
@@ -44,7 +46,8 @@ public class BackEnd {
 					System.out.println("test");
 					break;
 			}
-			st.getChildren().addAll(blink.getFade(), blink.getUnfade());
+			TranslateTransition nothing = new TranslateTransition(Duration.millis(500), red); // pad animation by 200ms
+			st.getChildren().addAll(nothing, blink.getFade(), blink.getUnfade());
 			st.setOnFinished(new EventHandler<ActionEvent>(){
 	            @Override
 	            public void handle(ActionEvent arg0) {
@@ -75,6 +78,7 @@ public class BackEnd {
 			int result = simonSays.stepEqual(mapPaintToConstantColor(c.getFill()));
 			switch (result) {
 				case SimonSaysOrder.MATCH:
+					scoreTracker.incrementScore();
 					if (simonSays.noMoreMoves()) {
 						this.state = BackEnd.SHOW;
 						simonSays.addNextColor();
@@ -93,6 +97,11 @@ public class BackEnd {
 		return this.state;
 	}
 
-
+	public int getScore() {
+		return this.scoreTracker.getScore();
+	}
 	
+	public ScoreTracker getScoreTracker() {
+		return scoreTracker;
+	}
 }
