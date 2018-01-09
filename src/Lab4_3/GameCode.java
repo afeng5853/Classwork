@@ -3,6 +3,8 @@ package Lab4_3;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+
 import javafx.animation.SequentialTransition;
 import javafx.animation.Animation.Status;
 import javafx.application.Application;
@@ -21,6 +23,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
 
 public class GameCode extends Application {
 	private final Circle red = new Circle();
@@ -43,7 +46,14 @@ public class GameCode extends Application {
 			show.play();
 		}
 		if (state == BackEnd.END) {
-			// display game over screen
+			//should try/catch
+			File theFile = new File("gameScores.csv");
+			CSVUtilities score = new CSVUtilities(theFile);
+			ScoreTracker endScore = new ScoreTracker(null, "Player",b.getScoreTracker().getScore());
+			score.saveScore(endScore);
+			System.out.println(score.getTopTen(1));
+			System.out.println("Appended");
+			// switch scenes
 		}
 	}
 	
