@@ -1,0 +1,21 @@
+.root {
+	-fx-background-color: #172727;
+}
+
+.game_info {
+	-fx-alignment: center;
+}
+
+.main {
+	-fx-alignment: center;
+}
+
+HBox, VBox {
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+
+Text {
+	-fx-fill: white;
+	-fx-font-size: 3em;
+}

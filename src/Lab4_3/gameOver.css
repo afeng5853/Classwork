@@ -1,0 +1,28 @@
+HBox, VBox {
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+
+TextField {
+	-fx-max-width: 200;
+    -fx-min-height: 20;
+}
+
+GridPane {
+	-fx-alignment: center;
+	-fx-padding: 10px;
+}
+
+Button {
+	-fx-padding: 10px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+Text {
+	-fx-font-size: 2em;
+}
+
+GridPane Text {
+	-fx-font-size: 1em;
+}
